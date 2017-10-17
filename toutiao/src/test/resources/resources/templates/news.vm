@@ -1,0 +1,33 @@
+<html>
+<body>
+nihao
+
+##我是注释，你看不到我
+
+#*
+我也是注释
+*#
+value：$!{value}</br>
+$!{value1}</br>
+$!{value2}
+
+#foreach($color in $value2)
+    </br>$!{color}:$color
+#end
+</br>
+#set($title="newcoder")
+include:#include("head.vm")
+parse:#parse("head.vm")
+
+</br>
+map.keySet()</br>
+#foreach($k in $value3map.keySet())
+   map.keySet():  $k : $value3map.get($k)</br>
+#end
+</br>
+map.entrySet()</br>
+#foreach($kv in $value3map.entrySet())
+   map.entrySet():  $kv.key : $!{kv.value}</br>
+#end
+</body>
+</html>

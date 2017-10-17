@@ -1,0 +1,90 @@
+#parse("header.html")
+<div id="main">
+    <div class="container">
+        #foreach($vo in $vos)
+        <ul class="letter-list">
+            <li id="conversation-item-10005_622873">
+                <a class="letter-link" href="msg-list?conversationId=$!{vo.msg.conversationId}&amp;updateRead=1&amp;msgType=1"></a>
+                <div class="letter-info">
+                    <span class="l-time">$date.format("yyyy-MM-dd hh:mm:ss",$!{vo.msg.createdDate})</span>
+                    <div class="l-operate-bar">
+                        <a href="javascript:void(0);" class="sns-action-del" data-id="10005_622873">
+                            删除
+                        </a>
+                        <a href="msg-list?conversationId=$!{vo.msg.conversationId}&amp;updateRead=1&amp;msgType=1">
+                            共$!{vo.allCount}条会话
+                        </a>
+                    </div>
+                </div>
+                <div class="chat-headbox">
+                        <span class="msg-num">
+                            #if($vo.noRead)
+                                $!{vo.noRead}
+                            #else
+                                99+
+                            #end
+                        </span>
+                    <a class="list-head">
+                        <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
+                    </a>
+                </div>
+                <div class="letter-detail">
+                    <a title="通知" class="letter-name level-color-1">
+                        通知
+                    </a>
+                    <p class="letter-brief">
+                        <a href="msg-list?conversationId=$!{vo.msg.conversationId}&amp;updateRead=1&amp;msgType=1">
+                            $!{vo.msg.content}
+                        </a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+        #end
+    </div>
+    <script type="text/javascript">
+          $(function(){
+
+            // If really is weixin
+            $(document).on('WeixinJSBridgeReady', function() {
+
+              $('.weixin-qrcode-dropdown').show();
+
+              var options = {
+                "img_url": "",
+                "link": "http://nowcoder.com/j/wt2rwy",
+                "desc": "",
+                "title": "读《Web 全栈工程师的自我修养》"
+              };
+
+              WeixinJSBridge.on('menu:share:appmessage', function (argv){
+                WeixinJSBridge.invoke('sendAppMessage', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              // $(window).on('touchmove scroll', function() {
+              //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              //     $('div.backdrop').show();
+              //     $('div.share-help').show();
+              //   } else {
+              //     $('div.backdrop').hide();
+              //     $('div.share-help').hide();
+              //   }
+              // });
+
+            });
+
+          })
+
+
+
+    </script>
+</div>
+#parse("footer.html")
